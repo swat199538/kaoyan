@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/liangwang/Develop/c/kaoyan/one/one.c
+one.h
+/Users/liangwang/Develop/c/kaoyan/one/one.h
+
+/Users/liangwang/Develop/c/kaoyan/one/one.h
+stdlib.h
+-
+

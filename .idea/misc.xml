@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$/one">
+    <contentRoot DIR="$PROJECT_DIR$" />
+  </component>
+  <component name="LaravelPluginSettings">
+    <option name="pluginEnabled" value="true" />
+  </component>
+  <component name="PhpCodeSniffer">
+    <phpcs_settings>
+      <PhpCSConfiguration tool_path="C:/development/phpcs.xml" />
+    </phpcs_settings>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+</project>
