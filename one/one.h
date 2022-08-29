@@ -11,3 +11,7 @@ typedef struct {
 void InitList(SeList* t);
 
 void IncreaseSize(SeList* t, int len);
+
+int ListDelete(SeList* l, int i, int* e);
+
+int ListAdd(SeList* l, int i, int e);
