@@ -1,3 +1,0 @@
-/mnt/d/personal/kaoyan/one/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/mnt/d/personal/kaoyan/one/cmake-build-debug/CMakeFiles/one.dir
-/mnt/d/personal/kaoyan/one/cmake-build-debug/CMakeFiles/edit_cache.dir

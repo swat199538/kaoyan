@@ -20,3 +20,5 @@ int ListDelete(SeList* l, int i, int* e);
 int ListInsert(SeList* l, int i, int e);
 
 void DumpListData(const SeList* l);
+
+int GetElem(SeList* l, int i, int* e);

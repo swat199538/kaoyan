@@ -1,1 +1,0 @@
-/usr/bin/cc -g  -rdynamic CMakeFiles/one.dir/one.c.o  -o one 

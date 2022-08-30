@@ -60,6 +60,12 @@ void DumpListData(const SeList* l){
     }
 }
 
+int GetElem(SeList* l, int i, int* e){
+    if(i < 1 || i > l->length) return 0;
+    *e = l->data[i-1];
+    return 1;
+}
+
 static void TestInsert(){
     SeList l;
 
@@ -111,9 +117,23 @@ static void TestDel(){
     DestroyList(&l);
 }
 
+static void TestGet(){
+    SeList l;
+
+    InitList(&l);
+
+    ListInsert(&l, 1, 1);
+    ListInsert(&l, 2, 2);
+    ListInsert(&l, 3, 3);
+
+    int e;
+
+    GetElem(&l, 2, &e);
+
+    printf("e value is %d \n", e);
+}
+
 int main(){
-
-    TestDel();
-
+    TestGet();
     return 0;
 }
