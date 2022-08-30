@@ -60,13 +60,13 @@ void DumpListData(const SeList* l){
     }
 }
 
-int GetElem(SeList* l, int i, int* e){
+int GetElem(const SeList* l, int i, int* e){
     if(i < 1 || i > l->length) return 0;
     *e = l->data[i-1];
     return 1;
 }
 
-int LocalElem(SeList*l, int e, int* i){
+int LocalElem(const SeList*l, int e, int* i){
 
     if(l->length <= 0) return 0;
 
@@ -78,6 +78,10 @@ int LocalElem(SeList*l, int e, int* i){
     }
 
     return 0;
+}
+
+int Empty(const SeList *l){
+    return l->length == 0;
 }
 
 static void TestInsert(){
@@ -169,7 +173,29 @@ static void TestLocal(){
 
 }
 
+static void TestEmpty(){
+
+    SeList  l;
+
+    InitList(&l);
+
+    ListInsert(&l, 1, 1);
+    ListInsert(&l, 1, 1);
+    ListInsert(&l, 1, 1);
+
+    int e;
+    ListDelete(&l, 1, &e);
+    ListDelete(&l, 1, &e);
+
+    if(Empty(&l)){
+        printf("is empty\n");
+    } else{
+        printf("not empty\n");
+    }
+
+}
+
 int main(){
-    TestLocal();
+    TestEmpty();
     return 0;
 }

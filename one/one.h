@@ -21,6 +21,8 @@ int ListInsert(SeList* l, int i, int e);
 
 void DumpListData(const SeList* l);
 
-int GetElem(SeList* l, int i, int* e);
+int GetElem(const SeList* l, int i, int* e);
 
-int LocalElem(SeList*l, int e, int* i);
+int LocalElem(const SeList*l, int e, int* i);
+
+int Empty(const SeList* l);
