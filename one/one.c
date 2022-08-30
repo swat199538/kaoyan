@@ -66,6 +66,20 @@ int GetElem(SeList* l, int i, int* e){
     return 1;
 }
 
+int LocalElem(SeList*l, int e, int* i){
+
+    if(l->length <= 0) return 0;
+
+    for (int j=0; j < l->length; j++){
+        if(l->data[j] == e){
+            *i = j+1;
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
 static void TestInsert(){
     SeList l;
 
@@ -133,7 +147,29 @@ static void TestGet(){
     printf("e value is %d \n", e);
 }
 
+static void TestLocal(){
+
+    SeList l;
+
+    InitList(&l);
+
+    ListInsert(&l, 1, 1);
+    ListInsert(&l, 2, 2);
+    ListInsert(&l, 3, 3);
+    ListInsert(&l, 5, 4);
+
+    int key;
+
+    if(LocalElem(&l, 4, &key)){
+        printf("located key is %d\n", key);
+    } else{
+        printf("not found \n");
+    }
+
+
+}
+
 int main(){
-    TestGet();
+    TestLocal();
     return 0;
 }
