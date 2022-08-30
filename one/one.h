@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 #define INIT_SIZE 10
 
@@ -12,6 +13,10 @@ void InitList(SeList* t);
 
 void IncreaseSize(SeList* t, int len);
 
+void DestroyList(SeList* l);
+
 int ListDelete(SeList* l, int i, int* e);
 
-int ListAdd(SeList* l, int i, int e);
+int ListInsert(SeList* l, int i, int e);
+
+void DumpListData(const SeList* l);

@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/Users/liangwang/Develop/c/kaoyan/one/one.c" "/Users/liangwang/Develop/c/kaoyan/one/cmake-build-debug/CMakeFiles/one.dir/one.c.o"
+  "/mnt/d/personal/kaoyan/one/one.c" "/mnt/d/personal/kaoyan/one/cmake-build-debug/CMakeFiles/one.dir/one.c.o"
   )
-set(CMAKE_C_COMPILER_ID "Clang")
+set(CMAKE_C_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH

@@ -6,7 +6,6 @@ void InitList(SeList* t){
     t->max_size = INIT_SIZE;
 }
 
-
 void IncreaseSize(SeList* l, int len){
     int *t = l->data;
     l->data = (int*) malloc(sizeof(int) * (len+INIT_SIZE));
@@ -18,38 +17,103 @@ void IncreaseSize(SeList* l, int len){
     free(t);
 }
 
-//i 是数组下标
+void DestroyList(SeList* l){
+    l->length = 0;
+    l->max_size = 0;
+    free(l->data);
+    free(l);
+}
+
 int ListDelete(SeList* l, int i, int* e){
 
-    if (i > l->length || i < 0) return 0;
+    if(i < 1 || i > l->length) return 0;
 
-    *e = l->data[i];
+    *e = l->data[i - 1];
 
-    for (int j=i; j < l->length; j++)
-        l->data[j] = l->data[j+1];
+    for (int j=i; j < l->length; j++){
+        l->data[j-1] = l->data[j];
+    }
 
-     l->length--;
+    l->length--;
     return 1;
 }
 
+int ListInsert(SeList* l, int i, int e){
+    if(i < 1 || i > l->length+1) return 0;
+    if(l->length >= l->max_size) return 0;
 
-int ListAdd(SeList* l, int i, int e){
+    for (int j = l->length; j > i-1; --j) {
+        l->data[j] = l->data[j-1];
+    }
 
-    if (i < 0 || i > l->length) return 0;
-
-    for (int j= l->length; j >= i; j--)
-        l->data[j] = l->data[j -1];
-
-    l->data[i] = e;
+    l->data[i-1] = e;
     l->length++;
 
     return 1;
 }
 
+void DumpListData(const SeList* l){
+    printf("list length is %d \n", l->length);
+    printf("list max length is %d \n", l->max_size);
+    for (int i=0; i < l->length; i++){
+        printf("index:%d, value:%d \n", i+1, l->data[i]);
+    }
+}
+
+static void TestInsert(){
+    SeList l;
+
+    InitList(&l);
+
+    ListInsert(&l, 1, 1);
+    ListInsert(&l, 1, 2);
+    ListInsert(&l, 1, 3);
+    ListInsert(&l, 1, 4);
+    ListInsert(&l, 1, 5);
+    ListInsert(&l, 1, 6);
+    ListInsert(&l, 1, 7);
+    ListInsert(&l, 1, 8);
+    ListInsert(&l, 1, 9);
+    ListInsert(&l, 1, 10);
+    ListInsert(&l, 1, 11);
+
+    IncreaseSize(&l, 5);
+
+    ListInsert(&l, 1, 12);
+    ListInsert(&l, 1, 13);
+    ListInsert(&l, 1, 14);
+    ListInsert(&l, 1, 15);
+    ListInsert(&l, 1, 16);
+
+    DumpListData(&l);
+
+    DestroyList(&l);
+}
+
+static void TestDel(){
+    SeList l;
+
+    InitList(&l);
+
+    ListInsert(&l, 1, 1);
+    ListInsert(&l, 2, 2);
+    ListInsert(&l, 3, 3);
+
+    DumpListData(&l);
+
+    int e;
+
+    ListDelete(&l, 2, &e);
+
+    printf("e value is %d\n", e);
+
+    DumpListData(&l);
+    DestroyList(&l);
+}
 
 int main(){
-    SeList t;
-    InitList(&t);
-    IncreaseSize(&t, 20);
+
+    TestDel();
+
     return 0;
 }
