@@ -21,7 +21,6 @@ void DestroyList(SeList* l){
     l->length = 0;
     l->max_size = 0;
     free(l->data);
-    free(l);
 }
 
 int ListDelete(SeList* l, int i, int* e){
@@ -52,26 +51,26 @@ int ListInsert(SeList* l, int i, int e){
     return 1;
 }
 
-void DumpListData(const SeList* l){
-    printf("list length is %d \n", l->length);
-    printf("list max length is %d \n", l->max_size);
-    for (int i=0; i < l->length; i++){
-        printf("index:%d, value:%d \n", i+1, l->data[i]);
+void DumpListData(SeList l){
+    printf("list length is %d \n", l.length);
+    printf("list max length is %d \n", l.max_size);
+    for (int i=0; i < l.length; i++){
+        printf("index:%d, value:%d \n", i+1, l.data[i]);
     }
 }
 
-int GetElem(const SeList* l, int i, int* e){
-    if(i < 1 || i > l->length) return 0;
-    *e = l->data[i-1];
+int GetElem(SeList l, int i, int* e){
+    if(i < 1 || i > l.length) return 0;
+    *e = l.data[i-1];
     return 1;
 }
 
-int LocalElem(const SeList*l, int e, int* i){
+int LocalElem(SeList l, int e, int* i){
 
-    if(l->length <= 0) return 0;
+    if(l.length <= 0) return 0;
 
-    for (int j=0; j < l->length; j++){
-        if(l->data[j] == e){
+    for (int j=0; j < l.length; j++){
+        if(l.data[j] == e){
             *i = j+1;
             return 1;
         }
@@ -80,8 +79,8 @@ int LocalElem(const SeList*l, int e, int* i){
     return 0;
 }
 
-int Empty(const SeList *l){
-    return l->length == 0;
+int Empty(SeList l){
+    return l.length == 0;
 }
 
 static void TestInsert(){
@@ -109,7 +108,7 @@ static void TestInsert(){
     ListInsert(&l, 1, 15);
     ListInsert(&l, 1, 16);
 
-    DumpListData(&l);
+    DumpListData(l);
 
     DestroyList(&l);
 }
@@ -123,7 +122,7 @@ static void TestDel(){
     ListInsert(&l, 2, 2);
     ListInsert(&l, 3, 3);
 
-    DumpListData(&l);
+    DumpListData(l);
 
     int e;
 
@@ -131,7 +130,7 @@ static void TestDel(){
 
     printf("e value is %d\n", e);
 
-    DumpListData(&l);
+    DumpListData(l);
     DestroyList(&l);
 }
 
@@ -146,9 +145,11 @@ static void TestGet(){
 
     int e;
 
-    GetElem(&l, 2, &e);
+    GetElem(l, 2, &e);
 
     printf("e value is %d \n", e);
+
+    DestroyList(&l);
 }
 
 static void TestLocal(){
@@ -164,12 +165,13 @@ static void TestLocal(){
 
     int key;
 
-    if(LocalElem(&l, 4, &key)){
+    if(LocalElem(l, 4, &key)){
         printf("located key is %d\n", key);
     } else{
         printf("not found \n");
     }
 
+    DestroyList(&l);
 
 }
 
@@ -187,15 +189,20 @@ static void TestEmpty(){
     ListDelete(&l, 1, &e);
     ListDelete(&l, 1, &e);
 
-    if(Empty(&l)){
+    if(Empty(l)){
         printf("is empty\n");
     } else{
         printf("not empty\n");
     }
 
+    DestroyList(&l);
 }
 
 int main(){
+    TestInsert();
+    TestDel();
+    TestGet();
+    TestLocal();
     TestEmpty();
     return 0;
 }
