@@ -1,4 +1,4 @@
-#include "one.h"
+#include "sequenceList.h"
 
 void InitList(SeList* t){
     t->data = (int*)malloc(sizeof(int) * INIT_SIZE);
