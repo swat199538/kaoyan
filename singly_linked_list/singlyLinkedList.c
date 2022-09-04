@@ -5,43 +5,6 @@
 #include "singlyLinkedList.h"
 
 
-LinkList InitList(){
-    LinkList l = (LNode*) malloc(sizeof(LNode));
-    l->data = 0;
-    l->next = NULL;
-    return l;
-}
-
-void DestroyList(LinkList l){
-    LNode* node = l->next;
-    while (node){
-        LNode* next = node->next;
-        free(node);
-        node = next;
-    }
-    free(l);
-}
-
-int ListInsert(LinkList l, int i, int e){
-    LNode *p = l;
-
-    int j = 0;
-
-    while (p && (j < i-1)){
-        p = p->next;
-        j++;
-    }
-
-    if(!p || (j > i-1)) return 0;
-
-    LNode *c = (LNode*)malloc(sizeof(LNode));
-    c->data = e;
-    c->next = p->next;
-    p->next = c;
-
-    return 1;
-}
-
 void DumpList(LinkList l){
     LNode *node = l->next;
     int i = 0;
@@ -52,18 +15,106 @@ void DumpList(LinkList l){
     }
 }
 
-int main(){
+//带头节点
+bool ListInsert(LinkList l, int i, int e){
 
-    LinkList l = InitList();
+    LNode *next = l;
+
+    int j = 0;
+
+    while (next!=NULL && (j < i -1)){
+        next = next->next;
+        j++;
+    }
+
+    if (next == NULL || j >= i){
+        return false;
+    }
+
+    LNode *current = (LNode*) malloc(sizeof(LNode));
+    current->data = e;
+    current->next = next->next;
+    next->next = current;
+
+    return true;
+}
+
+bool ListDelete(LinkList l, int i, int *e){
+
+    LNode *node = l;
+
+    int j = 0;
+    while (node != NULL && j < i-1){
+        node = node->next;
+        j++;
+    }
+
+    if (node == NULL || j >= i) return false;
+
+    LNode *tmp = node->next;
+
+    *e = tmp->data;
+    node->next = tmp->next;
+
+    free(tmp);
+    return true;
+}
+
+static void testInsert()
+{
+    LinkList l = (LNode*) malloc(sizeof(LNode));
+    l->data = 0;
+    l->next = NULL;
+
 
     ListInsert(l, 1, 1);
     ListInsert(l, 2, 2);
     ListInsert(l, 3, 3);
-    ListInsert(l, 1, 0);
+
+    if (!ListInsert(l, 0, 0)){
+        printf("插入失败\n");
+    }
+
+    if (!ListInsert(l, 5, 4)){
+        printf("插入4失败\n");
+    }
+
+    if (ListInsert(l, 4, 4)){
+        printf("插入4成功\n");
+    }
+
 
     DumpList(l);
+}
 
-    DestroyList(l);
+static void testDel(){
 
+    LinkList l = (LNode*) malloc(sizeof(LNode));
+    l->next = NULL;
+    l->data = 0;
+    int e;
+    ListInsert(l, 1, 1);
+    ListInsert(l, 2, 2);
+    ListInsert(l, 3, 3);
+
+    ListDelete(l, 2, &e);
+
+    DumpList(l);
+    printf("============\n");
+
+    if (!ListDelete(l, 5, &e)){
+        printf("%d删除失败\n", 5);
+    }
+
+    if (!ListDelete(l, 0, &e)){
+        printf("%d删除失败\n", 0);
+    }
+
+    DumpList(l);
+}
+
+int main(){
+    testInsert();
+    testDel();
     return 0;
 }

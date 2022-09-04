@@ -7,18 +7,18 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 typedef struct LNode{
     int data;
     struct LNode* next;
 } LNode, *LinkList;
 
-LinkList InitList();
-
-void DestroyList();
-
-int ListInsert(LinkList l, int i, int e);
 
 void DumpList(LinkList l);
+
+bool ListInsert(LinkList l, int i, int e);
+
+bool ListDelete(LinkList l, int i, int *e);
 
 #endif //ONE_SINGLYLINKEDLIST_H
