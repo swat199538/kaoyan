@@ -60,6 +60,22 @@ bool ListDelete(LinkList l, int i, int *e){
     return true;
 }
 
+void InitLinkListHead(LinkList l){
+
+    l = (LNode*) malloc(sizeof(LNode));
+
+    l->data = 0;
+    l->next = NULL;
+
+    int value;
+    while (scanf("%d", &value) != EOF){
+        LNode *q = (LNode*) malloc(sizeof(LNode));
+        q->data = value;
+        q->next = l->next;
+        l->next = q;
+    }
+}
+
 static void testInsert()
 {
     LinkList l = (LNode*) malloc(sizeof(LNode));
@@ -113,8 +129,13 @@ static void testDel(){
     DumpList(l);
 }
 
+static void testInitLinkListHead(){
+    LinkList list;
+    InitLinkListHead(list);
+    DumpList(list);
+}
+
 int main(){
-    testInsert();
-    testDel();
+    testInitLinkListHead();
     return 0;
 }

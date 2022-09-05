@@ -21,4 +21,6 @@ bool ListInsert(LinkList l, int i, int e);
 
 bool ListDelete(LinkList l, int i, int *e);
 
+void InitLinkListHead(LinkList l);
+
 #endif //ONE_SINGLYLINKEDLIST_H
