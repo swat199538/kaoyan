@@ -60,22 +60,6 @@ bool ListDelete(LinkList l, int i, int *e){
     return true;
 }
 
-void InitLinkListHead(LinkList l){
-
-    l = (LNode*) malloc(sizeof(LNode));
-
-    l->data = 0;
-    l->next = NULL;
-
-    int value;
-    while (scanf("%d", &value) != EOF){
-        LNode *q = (LNode*) malloc(sizeof(LNode));
-        q->data = value;
-        q->next = l->next;
-        l->next = q;
-    }
-}
-
 static void testInsert()
 {
     LinkList l = (LNode*) malloc(sizeof(LNode));
@@ -129,13 +113,44 @@ static void testDel(){
     DumpList(l);
 }
 
+LinkList InitLinkListHead(){
+
+    LinkList l = (LNode*)malloc(sizeof(LNode));
+    l->data = 0;
+    l->next = NULL;
+
+    int value = 0;
+
+    while (value != 1909){
+        scanf("%d", &value);
+        LNode *current = (LNode*) malloc(sizeof(LNode));
+        current->data = value;
+        current->next = l->next;
+        l->next = current;
+    }
+
+    return l;
+}
+
 static void testInitLinkListHead(){
-    LinkList list;
-    InitLinkListHead(list);
+    LinkList list = InitLinkListHead();
     DumpList(list);
 }
 
+void InitLinkListHeadTest(LNode* xnode){
+    printf("2 %p\n", xnode);
+    LNode* node = (LNode*) malloc(sizeof(LNode));
+    node->next = NULL;
+    node->data = 1;
+    xnode = node;
+    printf("3 %p\n", xnode);
+}
+
 int main(){
-    testInitLinkListHead();
+    LNode n;
+    printf("1 %p\n", &n);
+    InitLinkListHeadTest(&n);
+    printf("4 %p\n", &n);
+    printf("value is %d", n.data);
     return 0;
 }
