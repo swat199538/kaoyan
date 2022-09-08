@@ -60,6 +60,54 @@ bool ListDelete(LinkList l, int i, int *e){
     return true;
 }
 
+LinkList InitLinkListHead(){
+
+    LinkList l = (LNode*)malloc(sizeof(LNode));
+    l->data = 0;
+    l->next = NULL;
+
+    int value = 0;
+
+    while (value != 1909){
+        scanf("%d", &value);
+        if(value == 1909) break;
+        LNode *current = (LNode*) malloc(sizeof(LNode));
+        current->data = value;
+        current->next = l->next;
+        l->next = current;
+    }
+
+    return l;
+}
+
+LinkList InitLinkListTail(){
+    LinkList l = (LNode*) malloc(sizeof(LNode));
+    l->next = NULL;
+    l->data = 0;
+    LNode *node =l;
+    int value = 0;
+    while (value != 1909){
+        scanf("%d", &value);
+        if(value == 1909) break;
+        LNode *current = (LNode*) malloc(sizeof(LNode));
+        current->next = NULL;
+        current->data = value;
+        node->next = current;
+        node = current;
+    }
+    return l;
+}
+
+void DestroyList(LinkList l){
+    LNode *node = l;
+    while (!node){
+        LNode *tmp = node;
+        node = tmp->next;
+        free(tmp);
+    }
+    free(l);
+}
+
 static void testInsert()
 {
     LinkList l = (LNode*) malloc(sizeof(LNode));
@@ -113,44 +161,23 @@ static void testDel(){
     DumpList(l);
 }
 
-LinkList InitLinkListHead(){
-
-    LinkList l = (LNode*)malloc(sizeof(LNode));
-    l->data = 0;
-    l->next = NULL;
-
-    int value = 0;
-
-    while (value != 1909){
-        scanf("%d", &value);
-        LNode *current = (LNode*) malloc(sizeof(LNode));
-        current->data = value;
-        current->next = l->next;
-        l->next = current;
-    }
-
-    return l;
-}
-
 static void testInitLinkListHead(){
     LinkList list = InitLinkListHead();
     DumpList(list);
 }
 
-void InitLinkListHeadTest(LNode* xnode){
-    printf("2 %p\n", xnode);
-    LNode* node = (LNode*) malloc(sizeof(LNode));
-    node->next = NULL;
-    node->data = 1;
-    xnode = node;
-    printf("3 %p\n", xnode);
+static void testInitLinkListTail(){
+    LinkList l = InitLinkListTail();
+    DumpList(l);
+}
+
+static void testDestroy(){
+    LinkList l = InitLinkListTail();
+    DumpList(l);
+    DestroyList(l);
 }
 
 int main(){
-    LNode n;
-    printf("1 %p\n", &n);
-    InitLinkListHeadTest(&n);
-    printf("4 %p\n", &n);
-    printf("value is %d", n.data);
+    testDestroy();
     return 0;
 }

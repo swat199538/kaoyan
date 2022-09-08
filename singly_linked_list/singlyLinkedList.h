@@ -23,4 +23,8 @@ bool ListDelete(LinkList l, int i, int *e);
 
 LinkList InitLinkListHead();
 
+LinkList InitLinkListTail();
+
+void DestroyList(LinkList l);
+
 #endif //ONE_SINGLYLINKEDLIST_H
