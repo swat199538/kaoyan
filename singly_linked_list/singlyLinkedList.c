@@ -125,6 +125,19 @@ LinkList LinkListReverse(LinkList l){
     return newList;
 }
 
+int ListIndexOfElem(LinkList l, int e){
+    int i = 1;
+    LNode *node = l->next;
+    while (node != NULL){
+        if(node->data == e){
+            return i;
+        }
+        i++;
+        node = node->next;
+    }
+    return -1;
+}
+
 static void testInsert()
 {
     LinkList l = (LNode*) malloc(sizeof(LNode));
@@ -203,7 +216,20 @@ static void testReverse(){
     DumpList(l);
 }
 
+static void testIndexOf(){
+
+    LinkList l = InitLinkListTail();
+
+    int index = ListIndexOfElem(l, 4);
+
+    if(index != -1){
+        printf("index is %d\n", index);
+    } else{
+        printf("not found\n");
+    }
+}
+
 int main(){
-    testReverse();
+    testIndexOf();
     return 0;
 }

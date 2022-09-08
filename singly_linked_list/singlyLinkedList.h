@@ -29,5 +29,6 @@ void DestroyList(LinkList l);
 
 LinkList LinkListReverse(LinkList l);
 
+int ListIndexOfElem(LinkList l, int e);
 
 #endif //ONE_SINGLYLINKEDLIST_H
