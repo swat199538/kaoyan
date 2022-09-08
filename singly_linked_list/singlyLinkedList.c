@@ -99,13 +99,30 @@ LinkList InitLinkListTail(){
 }
 
 void DestroyList(LinkList l){
-    LNode *node = l;
-    while (!node){
+    LNode *node = l->next;
+    while (node != NULL){
         LNode *tmp = node;
         node = tmp->next;
         free(tmp);
     }
     free(l);
+}
+
+LinkList LinkListReverse(LinkList l){
+
+    LinkList newList = (LNode*) malloc(sizeof(LNode));
+
+    LNode *node = l->next;
+
+    while (node != NULL){
+        LNode *current = (LNode*) malloc(sizeof(LNode));
+        current->data = node->data;
+        current->next = newList->next;
+        newList->next = current;
+        node = node->next;
+    }
+
+    return newList;
 }
 
 static void testInsert()
@@ -177,7 +194,16 @@ static void testDestroy(){
     DestroyList(l);
 }
 
+static void testReverse(){
+    LinkList l = InitLinkListTail();
+    DumpList(l);
+    LinkList tmp = l;
+    l = LinkListReverse(l);
+    DestroyList(tmp);
+    DumpList(l);
+}
+
 int main(){
-    testDestroy();
+    testReverse();
     return 0;
 }

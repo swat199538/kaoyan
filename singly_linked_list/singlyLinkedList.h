@@ -27,4 +27,7 @@ LinkList InitLinkListTail();
 
 void DestroyList(LinkList l);
 
+LinkList LinkListReverse(LinkList l);
+
+
 #endif //ONE_SINGLYLINKEDLIST_H
