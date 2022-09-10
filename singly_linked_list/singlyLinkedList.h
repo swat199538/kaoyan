@@ -31,4 +31,6 @@ LinkList LinkListReverse(LinkList l);
 
 int ListIndexOfElem(LinkList l, int e);
 
+bool DeleteNode(LNode* node);
+
 #endif //ONE_SINGLYLINKEDLIST_H

@@ -138,6 +138,15 @@ int ListIndexOfElem(LinkList l, int e){
     return -1;
 }
 
+bool DeleteNode(LNode* node){
+    if (node == NULL) return false;
+    LNode *tmp = node->next;
+    node->data = node->next->data;
+    node->next = node->next->next;
+    free(tmp);
+    return true;
+}
+
 static void testInsert()
 {
     LinkList l = (LNode*) malloc(sizeof(LNode));
@@ -229,7 +238,26 @@ static void testIndexOf(){
     }
 }
 
+static void testDelNode(){
+
+    LinkList l = InitLinkListTail();
+
+    DumpList(l);
+
+    LNode *node = l;
+
+    for (int i = 0; i < 2; i++){
+        node = node->next;
+    }
+
+    printf("node value is %d\n", node->data);
+
+    DeleteNode(node);
+
+    DumpList(l);
+}
+
 int main(){
-    testIndexOf();
+    testDelNode();
     return 0;
 }
