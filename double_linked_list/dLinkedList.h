@@ -24,6 +24,11 @@ bool InsertNextNode(DNode *p, DNode *s);
 
 bool DeleteNextDNode(DNode *p);
 
+DNode* GetElement(DLinkList l, int index);
+
+void DumpDList(DLinkList l);
+
 void DestroyList(DLinkList l);
+
 
 #endif //SINGLYLINKEDLIST_DLINKEDLIST_H

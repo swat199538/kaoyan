@@ -23,16 +23,61 @@ bool EmptyList(DLinkList l){
     return false;
 }
 
+bool InsertNextNode(DNode *p, DNode *s){
 
-int main(){
+    if (p == NULL || s == NULL) return false;
+
+    s->next = p->next;
+    if (p->next != NULL){
+        p->next->prior = s;
+    }
+    s->prior = p;
+    p->next = s;
+
+    return true;
+}
+
+void DumpDList(DLinkList l){
+
+    if (l->prior != NULL){
+        printf("请输入头结点\n");
+    }
+
+    DNode *n = l->next;
+    int i = 1;
+    while (n!=NULL){
+        printf("key:%d  value:%d\n", i, n->data);
+        n = n->next;
+        i++;
+    }
+}
+
+
+void testInsert(){
 
     DLinkList l = InitDLinkList();
 
-    if (EmptyList(l)){
-        printf("is empty \n");
-    } else{
-        printf("not empty \n");
-    }
+    DNode *s = (DNode*) malloc(sizeof(DNode));
+    s->data = 1;
 
+    DNode *w = (DNode*) malloc(sizeof(DNode));
+    w->data = 2;
+
+    DNode *a = (DNode*) malloc(sizeof(DNode));
+    a->data = 3;
+
+    DNode *t = (DNode*) malloc(sizeof(DNode));
+    t->data = 4;
+
+    InsertNextNode(l, s);
+    InsertNextNode(s, w);
+    InsertNextNode(w, a);
+    InsertNextNode(a, t);
+
+    DumpDList(l);
+}
+
+int main(){
+    testInsert();
     return  0;
 }
