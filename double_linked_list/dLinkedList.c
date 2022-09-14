@@ -4,10 +4,6 @@
 
 #include "dLinkedList.h"
 
-bool Empty(DLinkList l){
-
-    return true;
-}
 
 DLinkList InitDLinkList(){
     DLinkList l = (DNode*) malloc(sizeof(DNode));
@@ -65,6 +61,16 @@ void DumpDList(DLinkList l){
     }
 }
 
+bool DeleteNextDNode(DNode *p){
+    if (p == NULL || p->next == NULL) return false;
+    DNode *tmp = p->next;
+    p->next = tmp->next;
+    if (tmp->next != NULL){
+        tmp->next->prior = p;
+    }
+    free(tmp);
+    return true;
+}
 
 void testNextInsert(){
 
