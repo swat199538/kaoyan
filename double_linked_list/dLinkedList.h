@@ -22,6 +22,8 @@ DLinkList InitDLinkList();
 
 bool InsertNextNode(DNode *p, DNode *s);
 
+bool InsertPriorNode(DNode *p, DNode *s);
+
 bool DeleteNextDNode(DNode *p);
 
 DNode* GetElement(DLinkList l, int index);

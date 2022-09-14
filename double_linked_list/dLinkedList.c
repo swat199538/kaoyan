@@ -37,6 +37,19 @@ bool InsertNextNode(DNode *p, DNode *s){
     return true;
 }
 
+bool InsertPriorNode(DNode *p, DNode *s){
+
+    //头节点不允许前插操作
+    if (p == NULL || s == NULL || p->prior == NULL) return false;
+
+    p->prior->next = s;
+    s->prior = p->prior;
+    p->prior = s;
+    s->next = p;
+
+    return true;
+}
+
 void DumpDList(DLinkList l){
 
     if (l->prior != NULL){
@@ -53,7 +66,7 @@ void DumpDList(DLinkList l){
 }
 
 
-void testInsert(){
+void testNextInsert(){
 
     DLinkList l = InitDLinkList();
 
@@ -77,7 +90,34 @@ void testInsert(){
     DumpDList(l);
 }
 
+void testPriorInsert(){
+
+    DLinkList l = InitDLinkList();
+
+    DNode *s = (DNode*) malloc(sizeof(DNode));
+    s->data = 4;
+
+    InsertNextNode(l, s);
+
+    DNode *w = (DNode*) malloc(sizeof(DNode));
+    w->data = 3;
+
+    InsertPriorNode(s, w);
+
+    DNode *a = (DNode*) malloc(sizeof(DNode));
+    a->data = 2;
+
+    InsertPriorNode(w, a);
+
+    DNode *t = (DNode*) malloc(sizeof(DNode));
+    t->data = 1;
+
+    InsertPriorNode(a, t);
+
+    DumpDList(l);
+}
+
 int main(){
-    testInsert();
+    testPriorInsert();
     return  0;
 }
