@@ -19,4 +19,8 @@ LinkList InitList();
 
 bool Empty(LinkList l);
 
+bool isTail(LinkList l, LNode *node);
+
+
+
 #endif

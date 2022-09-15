@@ -17,6 +17,15 @@ bool Empty(LinkList l){
     return false;
 }
 
+bool isTail(LinkList l, LNode *node){
+
+    if (node->next == l){
+        return true;
+    }
+
+    return false;
+}
+
 int main(){
 
     LinkList  l = InitList();
