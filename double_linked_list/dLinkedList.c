@@ -72,6 +72,24 @@ bool DeleteNextDNode(DNode *p){
     return true;
 }
 
+void DestroyList(DLinkList l){
+    DNode *p = l->prior;
+    DNode *n = l->next;
+    while (p != NULL || n != NULL){
+        if (p != NULL){
+            DNode *tmp = p;
+            p = p->prior;
+            free(tmp);
+        }
+        if (n != NULL){
+            DNode *tmp2 = n;
+            n = n->next;
+            free(tmp2);
+        }
+    }
+    free(l);
+}
+
 void testNextInsert(){
 
     DLinkList l = InitDLinkList();
@@ -123,7 +141,58 @@ void testPriorInsert(){
     DumpDList(l);
 }
 
+void testDel(){
+
+    DLinkList l = InitDLinkList();
+
+    DNode *a = (DNode*) malloc(sizeof(DNode));
+    a->data = 1;
+
+    DNode *b = (DNode*) malloc(sizeof(DNode));
+    b->data = 2;
+
+    DNode *c = (DNode*) malloc(sizeof(DNode));
+    c->data = 3;
+
+    InsertNextNode(l, a);
+    InsertNextNode(a, b);
+    InsertNextNode(b, c);
+
+    DumpDList(l);
+
+    DeleteNextDNode(a);
+
+    DumpDList(l);
+
+}
+
+void testDestroy(){
+
+    DLinkList l = InitDLinkList();
+
+    DNode *s = (DNode*) malloc(sizeof(DNode));
+    s->data = 1;
+
+    DNode *w = (DNode*) malloc(sizeof(DNode));
+    w->data = 2;
+
+    DNode *a = (DNode*) malloc(sizeof(DNode));
+    a->data = 3;
+
+    DNode *t = (DNode*) malloc(sizeof(DNode));
+    t->data = 4;
+
+    InsertNextNode(l, s);
+    InsertNextNode(s, w);
+    InsertNextNode(w, a);
+    InsertNextNode(a, t);
+
+    DumpDList(l);
+
+    DestroyList(w);
+}
+
 int main(){
-    testPriorInsert();
+    testDestroy();
     return  0;
 }
