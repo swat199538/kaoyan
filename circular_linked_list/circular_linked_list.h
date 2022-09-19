@@ -19,8 +19,18 @@ LinkList InitList();
 
 bool Empty(LinkList l);
 
+int Length(LinkList l);
+
+void LocateElem(LinkList l, int e);
+
+int GetElem(LinkList l, int i);
+
+bool ListInsert(LinkList  l, int i, int e);
+
+bool ListDelete(LinkList l, int i, int* e);
+
+void PrintList(LinkList l);
+
 bool isTail(LinkList l, LNode *node);
-
-
 
 #endif
