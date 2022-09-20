@@ -100,7 +100,8 @@ bool ListDelMin(SeList* l, int* data){
         }
     }
     *data = minValue;
-    l->data[minIndex] = l->data[l->length - 1];
+    l->data[minIndex] = l->data[l->length - 1]; //删除元素有最后一行填补
+    l->length--; //长度减一代码减少，这一行正常访问不到了
     return true;
 }
 
