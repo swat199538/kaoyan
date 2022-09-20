@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #define INIT_SIZE 10
 
@@ -24,5 +25,7 @@ void DumpListData(SeList l);
 int GetElem(SeList l, int i, int* e);
 
 int LocalElem(SeList l, int e, int* i);
+
+bool ListDelMin(SeList* l, int* data);
 
 int Empty(SeList l);

@@ -83,6 +83,27 @@ int Empty(SeList l){
     return l.length == 0;
 }
 
+bool ListDelMin(SeList* l, int* data){
+    //1.遍历整个顺序表记录下最小的元素和位置
+    //2.将最后一个元素的值填充到最小元素位置
+    //3.将最小元素值通过指针传出去
+    //空数组无法删除
+    if (l->length <= 0) return false;
+
+    int minIndex = 0;
+    int minValue = l->data[0];
+
+    for(int i =1; i < l->length; i++){
+        if (l->data[i] < minValue){
+            minValue = l->data[i];
+            minIndex = i;
+        }
+    }
+    *data = minValue;
+    l->data[minIndex] = l->data[l->length - 1];
+    return true;
+}
+
 static void TestInsert(){
     SeList l;
 
@@ -198,11 +219,25 @@ static void TestEmpty(){
     DestroyList(&l);
 }
 
+static void TestDelMin(){
+    SeList l;
+    InitList(&l);
+    ListInsert(&l, 1, 10);
+    ListInsert(&l, 2, 2);
+    ListInsert(&l, 3, 3);
+
+    DumpListData(l);
+
+    int *min;
+
+    ListDelMin(&l, min);
+
+    printf("min value is %d \n", *min);
+
+    DumpListData(l);
+}
+
 int main(){
-    TestInsert();
-    TestDel();
-    TestGet();
-    TestLocal();
-    TestEmpty();
+    TestDelMin();
     return 0;
 }
