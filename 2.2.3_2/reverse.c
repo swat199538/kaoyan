@@ -25,6 +25,17 @@ void reverse(SqList *L){
     }
 }
 
+void  del_x_elem(SqList *L, int x){
+    int k=0, i=0;
+    for (; i < L->len; i++){
+        if (L->data[i] != x){
+            L->data[k] = L->data[i];
+            k++;
+        }
+    }
+    L->len = k;
+}
+
 
 int main(){
     SqList* L = (SqList *) malloc(sizeof(SqList));
@@ -33,8 +44,15 @@ int main(){
         L->data[i] = i + 1;
         L->len++;
     }
+
+    L->data[5] = 1;
+    L->data[8] = 1;
+
     printList(L);
-    reverse(L);
+
+    del_x_elem(L, 1);
+
     printList(L);
+
     return 0;
 }

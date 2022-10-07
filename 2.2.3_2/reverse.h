@@ -14,6 +14,8 @@ typedef struct SqList{
 
 void reverse(SqList *L);
 
+void  del_x_elem(SqList *L, int x);
+
 void printList(SqList *l);
 
 #endif //SEQUENCELIST_REVERSE_H
