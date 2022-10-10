@@ -37,6 +37,25 @@ void  del_x_elem(SqList *L, int x){
 }
 
 
+int del_range(SqList *L, int s, int t){
+
+    if (L->len <= 0 || s >= t) return 0;
+
+    int k = 0;
+
+    for(int i=0; i < L->len; i++){
+        int data = L->data[i];
+        if (data >= s && data <= t){
+            k++;
+        } else{
+            L->data[i-k] = L->data[i];
+        }
+    }
+
+    L->len -= k;
+    return 1;
+}
+
 int main(){
     SqList* L = (SqList *) malloc(sizeof(SqList));
     L->len = 0;
@@ -45,12 +64,11 @@ int main(){
         L->len++;
     }
 
-    L->data[5] = 1;
-    L->data[8] = 1;
-
     printList(L);
 
-    del_x_elem(L, 1);
+    printf("\n\n");
+
+    del_range(L, 1, 9);
 
     printList(L);
 

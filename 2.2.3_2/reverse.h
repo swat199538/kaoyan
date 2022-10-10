@@ -18,4 +18,6 @@ void  del_x_elem(SqList *L, int x);
 
 void printList(SqList *l);
 
+int del_range(SqList *L, int s, int t);
+
 #endif //SEQUENCELIST_REVERSE_H
