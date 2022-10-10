@@ -37,7 +37,7 @@ void  del_x_elem(SqList *L, int x){
 }
 
 //仔细考虑了一下不符合题目要求
-//因为是删除s到t范围内的，可能顺序表中没有等于s和t的值，这个算法就失效了
+//最主要题目要求当中重点说明了是有序的顺序表，这个不能体现出有序
 int del_range(SqList *L, int s, int t){
 
     if (L->len <= 0 || s >= t) return 0;
@@ -57,6 +57,8 @@ int del_range(SqList *L, int s, int t){
     return 1;
 }
 
+
+//符合题目4的有序顺序表
 int del_range_2(SqList *L, int s, int t){
 
     //不允许为空，不允许 s大于等于t
