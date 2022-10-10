@@ -20,4 +20,6 @@ void printList(SqList *l);
 
 int del_range(SqList *L, int s, int t);
 
+int del_range_2(SqList *L, int s, int t);
+
 #endif //SEQUENCELIST_REVERSE_H

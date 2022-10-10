@@ -56,6 +56,29 @@ int del_range(SqList *L, int s, int t){
     return 1;
 }
 
+int del_range_2(SqList *L, int s, int t){
+
+    //不允许为空，不允许 s大于等于t
+    if(L->len <= 0 || s >= t) return 0;
+
+    int i =0, j;
+
+    for (; i < L->len && L->data[i] < s; i++);
+
+    if (i >= L->len) return 0;
+
+    for (j=i; j < L->len && L->data[j] <= t; j++);
+
+    for (; j < L->len; i++, j++){
+        L->data[i] = L->data[j];
+    }
+
+    L->len = i;
+
+    return 1;
+}
+
+
 int main(){
     SqList* L = (SqList *) malloc(sizeof(SqList));
     L->len = 0;
@@ -68,7 +91,7 @@ int main(){
 
     printf("\n\n");
 
-    del_range(L, 1, 9);
+    del_range_2(L, 10, 10);
 
     printList(L);
 
