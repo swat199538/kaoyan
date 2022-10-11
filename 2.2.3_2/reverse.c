@@ -15,6 +15,14 @@ void printList(SqList *l){
     }
 }
 
+void printList2(SqList2 *l){
+    if(l->len <= 0) return;
+
+    for(int i=0; i < l->len; i++){
+        printf("%d \n", l->data[i]);
+    }
+}
+
 void reverse(SqList *L){
     if(L->len <= 0) return;
     int tmp;
@@ -81,22 +89,81 @@ int del_range_2(SqList *L, int s, int t){
     return 1;
 }
 
+//从有序顺序表中删除所有其值重复的元素，使表中所有元素均不相同
+int del_same(SqList *l){
 
-int main(){
-    SqList* L = (SqList *) malloc(sizeof(SqList));
-    L->len = 0;
-    for (int i = 0; i < MAX_LEN; ++i) {
-        L->data[i] = i + 1;
-        L->len++;
+    if (l->len <= 0) return 0;
+
+    int i = 0, j = 1;
+
+    for(; j < l->len; j++){
+        if (l->data[i] != l->data[j]){
+            i++;
+            l->data[i] = l->data[j];
+        }
     }
 
-    printList(L);
+    l->len = i + 1;
 
-    printf("\n\n");
+    return 1;
+}
 
-    del_range_2(L, 10, 10);
+//合并两个顺序表
+SqList2* merge_list(SqList2 *l1, SqList2 *l2){
 
-    printList(L);
+    if (l1->len <=0 && l2->len <= 0) return NULL;
+
+    SqList2 *l3 = (SqList2 *) malloc(sizeof(SqList2));
+
+    l3->len = l1->len + l2->len;
+    l3->data = (int*) malloc(sizeof(int) * l3->len);
+
+    int j = 0;
+
+    for (int i = 0; i < l1->len; ++i, ++j) {
+        l3->data[j] = l1->data[i];
+    }
+
+    for (int i = 0; i < l2->len; ++i, ++j) {
+        l3->data[j] = l2->data[i];
+    }
+
+    free(l1);
+    free(l2);
+
+    return l3;
+}
+
+//有序顺序表A和有序顺序表B合并到新有序顺序表C
+bool merge_order_list(SqList *A, SqList *B, SqList2 *C){
+
+
+    return true;
+}
+
+void init_sq2(SqList2* l, int index, int len){
+
+    l->len = len;
+    l->data = (int*) malloc(sizeof(int) * len);
+
+    for (int i = 0; i < len; ++i) {
+        l->data[i] = index;
+        index++;
+    }
+}
+
+
+int main(){
+
+    SqList2 *l1 = (SqList2*) malloc(sizeof(SqList2));
+    SqList2 *l2 = (SqList2*) malloc(sizeof(SqList2));
+
+    init_sq2(l1, 1, 3);
+    init_sq2(l2, 4, 3);
+
+    SqList2 *l3 = merge_list(l1, l2);
+
+    printList2(l3);
 
     return 0;
 }
