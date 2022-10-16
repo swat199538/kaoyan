@@ -204,31 +204,35 @@ bool reverse_list(int* A, int left,  int right, int array_size){
 void exchange_list(int* A, int m, int n, int array_size){
     reverse_list(A, 0, m+n-1, array_size);
     reverse_list(A, 0, n-1, array_size);
-    reverse_list(A, n, m+n, array_size);
+    reverse_list(A, n, m+n-1, array_size);
 }
 
 
 int main(){
 
-    int p[10];
+    int p[7];
 
-    for (int i=0; i < 7; i++){
-        p[i] = i+1;
+    int k = 1;
+    for (int i=0; i < 3; i++){
+        p[i] = k+10;
+        k++;
     }
 
-    for (int i = 7; i < 10; ++i) {
-        p[i] = i+10;
+    k = 1;
+    for (int i = 3; i < 7; ++i) {
+        p[i] = k+20;
+        k++;
     }
 
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 7; ++i) {
         printf("k:%d, v:%d\n", i, p[i]);
     }
 
-    exchange_list(p, 7, 3, 10);
+    exchange_list(p, 3, 4, 7);
 
     printf("\n\n");
 
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 7; ++i) {
         printf("k:%d, v:%d\n", i, p[i]);
     }
 
