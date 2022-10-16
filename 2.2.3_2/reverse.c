@@ -137,7 +137,34 @@ SqList2* merge_list(SqList2 *l1, SqList2 *l2){
 //有序顺序表A和有序顺序表B合并到新有序顺序表C
 bool merge_order_list(SqList *A, SqList *B, SqList2 *C){
 
+    //超过了C的范围
+    if (A->len + B->len > C->max_len) return false;
 
+    int i = 0;
+    int j = 0;
+    int k = 0;
+
+    while (i < A->len || j < B->len){
+        if (i < A->len && j < B->len){
+            int tmp = A->data[i];
+            if (B->data[j] < tmp){
+                tmp = B->data[j];
+                j++;
+            } else{
+                i++;
+            }
+            C->data[k] = tmp;
+        } else if(i < A->len){
+            C->data[k] = A->data[i];
+            i++;
+        } else if (j < B->len){
+            C->data[k] = B->data[j];
+            j++;
+        }
+        k++;
+    }
+
+    C->len = A->len+B->len;
     return true;
 }
 
@@ -152,18 +179,58 @@ void init_sq2(SqList2* l, int index, int len){
     }
 }
 
+void init_sq(SqList *l, int index, int len){
+    l->len = 0;
+    for (int i = 0; i < len; ++i) {
+        l->data[i] = index;
+        index++;
+        l->len++;
+    }
+}
+
+
+bool reverse_list(int* A, int left,  int right, int array_size){
+    if (left>= right || right >= array_size) return false;
+    int mid = (left+right) /2;
+    for (int i=0; i<= mid-left;i++){
+        int temp = A[left+i];
+        A[left+i] = A[right-i];
+        A[right-i] = temp;
+    }
+    return true;
+}
+
+
+void exchange_list(int* A, int m, int n, int array_size){
+    reverse_list(A, 0, m+n-1, array_size);
+    reverse_list(A, 0, n-1, array_size);
+    reverse_list(A, n, m+n, array_size);
+}
+
 
 int main(){
 
-    SqList2 *l1 = (SqList2*) malloc(sizeof(SqList2));
-    SqList2 *l2 = (SqList2*) malloc(sizeof(SqList2));
+    int p[10];
 
-    init_sq2(l1, 1, 3);
-    init_sq2(l2, 4, 3);
+    for (int i=0; i < 7; i++){
+        p[i] = i+1;
+    }
 
-    SqList2 *l3 = merge_list(l1, l2);
+    for (int i = 7; i < 10; ++i) {
+        p[i] = i+10;
+    }
 
-    printList2(l3);
+    for (int i = 0; i < 10; ++i) {
+        printf("k:%d, v:%d\n", i, p[i]);
+    }
+
+    exchange_list(p, 7, 3, 10);
+
+    printf("\n\n");
+
+    for (int i = 0; i < 10; ++i) {
+        printf("k:%d, v:%d\n", i, p[i]);
+    }
 
     return 0;
 }

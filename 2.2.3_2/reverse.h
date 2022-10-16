@@ -38,4 +38,8 @@ SqList2* merge_list(SqList2 *l1, SqList2 *l2);
 
 bool merge_order_list(SqList *A, SqList *B, SqList2 *c);
 
+bool reverse_list(int* l, int left, int right, int array_size);
+
+void exchange_list(int*l , int m, int n, int array_size);
+
 #endif //SEQUENCELIST_REVERSE_H
