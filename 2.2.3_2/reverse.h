@@ -42,4 +42,6 @@ bool reverse_list(int* l, int left, int right, int array_size);
 
 void exchange_list(int*l , int m, int n, int array_size);
 
+void searchExchangeInsert(SqList *l, int x);
+
 #endif //SEQUENCELIST_REVERSE_H

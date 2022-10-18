@@ -207,6 +207,62 @@ void exchange_list(int* A, int m, int n, int array_size){
     reverse_list(A, n, m+n-1, array_size);
 }
 
+void searchExchangeInsert(SqList *l, int x){
+
+    int low = 0, high = l->len -1, mid;
+
+    while (low <= high){
+        mid = (low + high) / 2;
+        if (l->data[mid] == x){
+            break;
+        } else if (l->data[mid] < x){
+            low = mid + 1;
+        } else{
+            high = mid -1;
+        }
+    }
+
+    if (l->data[mid] == x && mid != l->len-1){
+        int t = l->data[mid];
+        l->data[mid] = l->data[mid+1];
+        l->data[mid+1] = t;
+    }
+
+    if (low > high){
+        int i =l->len -1;
+        for (; i > high ; i--) {
+            l->data[i+1]=l->data[i];
+        }
+        l->data[i+1];
+    }
+}
+
+
+bool fast_find(SqList *l, int x){
+
+    if (l->len <= 0) return false;
+
+    int mid = (l->len - 1)/2;
+
+    int i =0, j = l->len;
+
+    while ( i<=mid || j >= mid ){
+
+        if (i <= mid){
+
+            if (l->data[i] == x){
+
+            }
+
+        }
+
+
+    }
+
+
+
+}
+
 
 int main(){
 
