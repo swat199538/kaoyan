@@ -7,6 +7,6 @@
 
 #include "stdio.h"
 
-char** explode(char se, const char* str, size_t* len);
+char** explode(char* se,  char str, size_t* len);
 
 #endif //REVERSE_EXPRESSION_EVALUATION_H

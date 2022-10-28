@@ -3,6 +3,7 @@
 //
 
 #include <stdlib.h>
+#include <assert.h>
 #include "expression_evaluation.h"
 #include "sq_stack.h"
 #include "string.h"
@@ -31,31 +32,48 @@ int main(){
     return 0;
 }
 
-char** explode(char se, const char* str, size_t* len){
-    char* string = strdup(str);
+char** explode(char* a_str, const char a_delim, size_t* len){
+    char** result = 0;
+    size_t count = 0;
+    char* tmp = a_str;
+    char* last_comma = 0;
+    char delim[2];
+    delim[0] = a_delim;
+    delim[1] = 0;
 
-    int currentLen = 0;
-
-    char *ptr = strtok(string, &se);
-
-    while (ptr != NULL){
-        currentLen++;
-        ptr = strtok(NULL, &se);
+    while (*tmp){
+        if(a_delim == *tmp){
+            count++;
+            last_comma = tmp;
+        }
+        tmp++;
     }
 
-    char** ret = malloc(sizeof(size_t)*13);
+    /* Add space for trailing token. */
+    count += last_comma < (a_str + strlen(a_str) - 1);
 
-    ptr = strtok(string, &se);
+    /* Add space for terminating null string so caller
+       knows where the list of returned strings ends. */
+    count++;
 
-    int i = 0;
-    while (ptr != NULL){
-        ptr = strtok(NULL, &se);
-        ret[i] = malloc(sizeof(char*));
-        strcpy(ret[i], ptr);
+    result = malloc(sizeof(char*) * count);
+
+    if (result)
+    {
+        size_t idx  = 0;
+        char* token = strtok(a_str, delim);
+
+        while (token)
+        {
+            assert(idx < count);
+            *(result + idx++) = strdup(token);
+            token = strtok(0, delim);
+        }
+        assert(idx == count - 1);
+        *(result + idx) = 0;
     }
 
-    free(string);
+    *len = count;
 
-    *len = currentLen;
-    return ret;
+    return result;
 }
